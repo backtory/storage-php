@@ -1,0 +1,40 @@
+{
+  "name": "backtory/storage-php",
+  "description": "PHP SDK for Backtory Cloud Storage :)",
+  "version": "v1.0.0",
+  "type": "library",
+  "homepage": "http://backtory.com",
+  "support": {
+    "email": "support@backtory.com",
+    "docs": "https://backtory.com/documents"
+  },
+  "keywords": [
+    "backtory",
+    "backtory-sdk",
+    "backtory-storage",
+    "cloud-storage",
+    "cloud",
+    "storage"
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.3",
+    "monolog/monolog": "^1.23",
+    "hassankhan/config": "^0.10.0",
+    "symfony/yaml": "^3.3",
+    "namshi/cuzzle": "^2.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Abbas Moazzami",
+      "email": "www.abbas.mg@gmail.com",
+      "role": "developer",
+      "homepage": "http://amgir.ir"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Backtory\\Storage\\": "src/"
+    }
+  }
+}
