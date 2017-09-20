@@ -232,7 +232,7 @@ class BacktoryStorage
         $file = null;
         if (is_resource($fileOrPath)) {
             $file = $fileOrPath;
-        } elseif (is_file($fileOrPath)) {
+        } elseif (is_file($fileOrPath) || filter_var($fileOrPath, FILTER_VALIDATE_URL)) {
             $file = fopen($fileOrPath, 'r');
         } else {
             throw new BacktoryInvalidFileParameterException();
