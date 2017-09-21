@@ -22,8 +22,7 @@ class Utility
                 return false;
             }
             if (empty($name)) {
-                $revAddress = strrev($address);
-                $name = urldecode(strrev(substr($revAddress, 0, stripos($revAddress, "/"))));
+                $name = self::getFileName($address);
             }
 
             $fp = fopen($destination . DIRECTORY_SEPARATOR . $name, 'w+');
@@ -34,5 +33,15 @@ class Utility
         } catch (Exception $exception) {
             return false;
         }
+    }
+
+    /**
+     * @param $path
+     * @return string
+     */
+    public static function getFileName($path)
+    {
+        $revPath = strrev($path);
+        return urldecode(strrev(substr($revPath, 0, stripos($revPath, "/"))));
     }
 }
