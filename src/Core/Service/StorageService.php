@@ -243,6 +243,12 @@ class StorageService
      */
     public function emptyFileList()
     {
+        foreach ($this->files as $file) {
+            if (is_resource($file)) {
+                fclose($file);
+            }
+        }
+
         $this->files = [];
 
         return $this;
