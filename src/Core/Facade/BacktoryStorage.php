@@ -209,13 +209,14 @@ class BacktoryStorage
         $path = "/",
         $pageNumber = 0,
         $pageSize = ApplicationConfig::DIRECTORY_INFO_MAX_PAGE_COUNT,
+        $field = "id",
         $sort = "ASC"
     )
     {
         self::throwIfNotInit();
 
         return StorageService::getInstance()
-            ->directoryInfo($path, $pageNumber, $pageSize, $sort);
+            ->directoryInfo($path, $pageNumber, $pageSize, $field, $sort);
     }
 
     /**
