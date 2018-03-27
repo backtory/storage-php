@@ -337,7 +337,7 @@ class StorageService
      * @param string $sort
      * @return mixed
      */
-    public function directoryInfo($path = "/", $pageNumber = 0, $pageSize = 50, $sort = "ASC")
+    public function directoryInfo($path = "/", $pageNumber = 0, $pageSize = 50, $field="id", $sort = "ASC")
     {
         if ($pageSize > ApplicationConfig::DIRECTORY_INFO_MAX_PAGE_COUNT) {
             $pageSize = ApplicationConfig::DIRECTORY_INFO_MAX_PAGE_COUNT;
@@ -350,6 +350,7 @@ class StorageService
                 Keys::URL => $path,
                 Keys::PAGE => $pageNumber,
                 Keys::PAGE_COUNT => $pageSize,
+                Keys::FIELD => $field,
                 Keys::SORT => $sort
             ], new DirectoryInfoResponseTransformer())
         );
