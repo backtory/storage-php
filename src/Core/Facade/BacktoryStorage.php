@@ -34,19 +34,19 @@ class BacktoryStorage
     /**
      * @param $xBacktoryAuthenticationId
      * @param $xBacktoryAuthenticationKey
-     * @param $xBacktoryObjectStorageId
+     * @param $xBacktoryStorageId
      * @return static
      */
     public static function init(
         $xBacktoryAuthenticationId,
         $xBacktoryAuthenticationKey,
-        $xBacktoryObjectStorageId)
+        $xBacktoryStorageId)
     {
         if (!empty(self::$instance)) {
             return self::$instance;
         }
 
-        self::buildStorageService($xBacktoryAuthenticationId, $xBacktoryAuthenticationKey, $xBacktoryObjectStorageId);
+        self::buildStorageService($xBacktoryAuthenticationId, $xBacktoryAuthenticationKey, $xBacktoryStorageId);
 
         return self::$instance = new static();
     }
@@ -255,6 +255,9 @@ class BacktoryStorage
 
         foreach ($files as $file) {
             if (array_key_exists(Keys::FILE, $file)) {
+                if (is_file($file[Keys::FILE]) || filter_var($file[Keys::FILE], FILTER_VALIDATE_URL)) {
+                    $file[Keys::FILE] = fopen($file[Keys::FILE], 'r');
+                }
                 $storageService->addFile(
                     $file[Keys::FILE],
                     isset($file[Keys::BACKTORY_STORAGE_PATH]) ? $file[Keys::BACKTORY_STORAGE_PATH] : "/",
