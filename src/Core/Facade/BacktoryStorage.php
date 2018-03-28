@@ -226,7 +226,7 @@ class BacktoryStorage
      * @return mixed
      * @throws BacktoryInvalidFileParameterException
      */
-    public static function put($fileOrPath, $backtoryStoragePath = "/", $replace = true)
+    public static function put($fileOrPath, $backtoryStoragePath = "/", $replace = "false")
     {
         self::throwIfNotInit();
 
@@ -262,7 +262,7 @@ class BacktoryStorage
                 $storageService->addFile(
                     $file[Keys::FILE],
                     isset($file[Keys::BACKTORY_STORAGE_PATH]) ? $file[Keys::BACKTORY_STORAGE_PATH] : "/",
-                    isset($file[Keys::REPLACE]) ? $file[Keys::REPLACE] : true
+                    isset($file[Keys::REPLACE]) ? $file[Keys::REPLACE] : "false"
                 );
             }
         }
@@ -347,7 +347,7 @@ class BacktoryStorage
      * @param bool $force
      * @return mixed
      */
-    public static function move($files, $destination, $force = true)
+    public static function move($files, $destination, $force = "false")
     {
         self::throwIfNotInit();
 
