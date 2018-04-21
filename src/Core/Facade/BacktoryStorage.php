@@ -34,19 +34,19 @@ class BacktoryStorage
     /**
      * @param $xBacktoryAuthenticationId
      * @param $xBacktoryAuthenticationKey
-     * @param $xBacktoryObjectStorageId
+     * @param $xBacktoryStorageId
      * @return static
      */
     public static function init(
         $xBacktoryAuthenticationId,
         $xBacktoryAuthenticationKey,
-        $xBacktoryObjectStorageId)
+        $xBacktoryStorageId)
     {
         if (!empty(self::$instance)) {
             return self::$instance;
         }
 
-        self::buildStorageService($xBacktoryAuthenticationId, $xBacktoryAuthenticationKey, $xBacktoryObjectStorageId);
+        self::buildStorageService($xBacktoryAuthenticationId, $xBacktoryAuthenticationKey, $xBacktoryStorageId);
 
         return self::$instance = new static();
     }
@@ -209,13 +209,14 @@ class BacktoryStorage
         $path = "/",
         $pageNumber = 0,
         $pageSize = ApplicationConfig::DIRECTORY_INFO_MAX_PAGE_COUNT,
+        $field = "id",
         $sort = "ASC"
     )
     {
         self::throwIfNotInit();
 
         return StorageService::getInstance()
-            ->directoryInfo($path, $pageNumber, $pageSize, $sort);
+            ->directoryInfo($path, $pageNumber, $pageSize, $field, $sort);
     }
 
     /**
@@ -225,7 +226,7 @@ class BacktoryStorage
      * @return mixed
      * @throws BacktoryInvalidFileParameterException
      */
-    public static function put($fileOrPath, $backtoryStoragePath = "/", $replace = true)
+    public static function put($fileOrPath, $backtoryStoragePath = "/", $replace = "false")
     {
         self::throwIfNotInit();
 
@@ -255,10 +256,13 @@ class BacktoryStorage
 
         foreach ($files as $file) {
             if (array_key_exists(Keys::FILE, $file)) {
+                if (is_file($file[Keys::FILE]) || filter_var($file[Keys::FILE], FILTER_VALIDATE_URL)) {
+                    $file[Keys::FILE] = fopen($file[Keys::FILE], 'r');
+                }
                 $storageService->addFile(
                     $file[Keys::FILE],
                     isset($file[Keys::BACKTORY_STORAGE_PATH]) ? $file[Keys::BACKTORY_STORAGE_PATH] : "/",
-                    isset($file[Keys::REPLACE]) ? $file[Keys::REPLACE] : true
+                    isset($file[Keys::REPLACE]) ? $file[Keys::REPLACE] : "false"
                 );
             }
         }
@@ -343,7 +347,7 @@ class BacktoryStorage
      * @param bool $force
      * @return mixed
      */
-    public static function move($files, $destination, $force = true)
+    public static function move($files, $destination, $force = "false")
     {
         self::throwIfNotInit();
 
