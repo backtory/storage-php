@@ -78,7 +78,7 @@ class BacktoryStorage
         $isConfigFileValid = true;
         $isConfigFileValid &= $config->has(Keys::X_BACKTORY_AUTHENTICATION_ID);
         $isConfigFileValid &= $config->has(Keys::X_BACKTORY_AUTHENTICATION_KEY);
-        $isConfigFileValid &= $config->has(Keys::X_BACKTORY_OBJECT_STORAGE_ID);
+        $isConfigFileValid &= $config->has(Keys::X_BACKTORY_STORAGE_ID);
 
         if ($isConfigFileValid) {
             GuzzleLogObserver::$LOG_PATH = $config->get(Keys::LOG_PATH, "");
@@ -86,7 +86,7 @@ class BacktoryStorage
             $storageService = self::buildStorageService(
                 $config->get(Keys::X_BACKTORY_AUTHENTICATION_ID),
                 $config->get(Keys::X_BACKTORY_AUTHENTICATION_KEY),
-                $config->get(Keys::X_BACKTORY_OBJECT_STORAGE_ID)
+                $config->get(Keys::X_BACKTORY_STORAGE_ID)
             );
 
             $storageService->setHeaders($config->get(Keys::HEADERS, []));

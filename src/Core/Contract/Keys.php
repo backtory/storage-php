@@ -59,7 +59,7 @@ class Keys
     /**
      *
      */
-    const X_BACKTORY_OBJECT_STORAGE_ID = "X-Backtory-Object-Storage-Id";
+    const X_BACKTORY_STORAGE_ID = "X-Backtory-Storage-Id";
     /**
      *
      */
