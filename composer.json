@@ -1,7 +1,7 @@
 {
   "name": "backtory/storage-php",
   "description": "PHP SDK for Backtory Cloud Storage :)",
-  "version": "v1.0.0",
+  "version": "v1.1.2",
   "type": "library",
   "homepage": "http://backtory.com",
   "support": {
