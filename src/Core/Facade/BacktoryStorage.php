@@ -297,7 +297,12 @@ class BacktoryStorage
      */
     public static function exists($filePath)
     {
-        return empty(self::fileInfo($filePath)) ? false : true;
+        $result = empty(self::fileInfo($filePath)) ? false : true;
+        if (!$result) {
+            $result = empty(self::directoryInfo($filePath)) ? false : true;
+        }
+
+        return $result;
     }
 
     /**
