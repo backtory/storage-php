@@ -5,7 +5,7 @@ use Backtory\Storage\Core\Facade\BacktoryStorage;
 
 BacktoryStorage::initWithConfigFile("config.yml"); // supported config formats: .ini, .php, .xml, .json, .yml
 // or
-BacktoryStorage::init("BacktoryAuthenticationId", "BacktoryAuthenticationKey", "xBacktoryObjectStorageId");
+BacktoryStorage::init("BacktoryAuthenticationId", "BacktoryAuthenticationKey", "xBacktoryStorageId");
 
 
 // headers and parameters
