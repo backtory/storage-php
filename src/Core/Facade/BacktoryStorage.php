@@ -256,7 +256,7 @@ class BacktoryStorage
 
         foreach ($files as $file) {
             if (array_key_exists(Keys::FILE, $file)) {
-                if (is_file($file[Keys::FILE]) || filter_var($file[Keys::FILE], FILTER_VALIDATE_URL)) {
+                if (!is_resource($file[Keys::FILE]) && (is_file($file[Keys::FILE]) || filter_var($file[Keys::FILE], FILTER_VALIDATE_URL))) {
                     $file[Keys::FILE] = fopen($file[Keys::FILE], 'r');
                 }
                 $storageService->addFile(
